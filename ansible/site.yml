@@ -1,0 +1,14 @@
+- name: Configure DevOps machines
+  hosts: all
+  become: true
+  tasks:
+    - name: Install Docker
+      package:
+        name: docker
+        state: present
+
+    - name: Enable Docker
+      service:
+        name: docker
+        state: started
+        enabled: true
