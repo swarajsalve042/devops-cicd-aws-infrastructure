@@ -14,10 +14,10 @@ The following GitHub Actions workflows have completed successfully on the `main`
 | Build and Push Node.js Image to Amazon ECR | GitHub OIDC authentication succeeded; image built, tagged, and pushed to ECR |
 
 Latest verified workflow runs:
-- [Node.js CI](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45354242028)
-- [Docker Build and Test](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45354242019)
-- [Publish Docker image to GHCR](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45354242059)
-- [Build and Push to Amazon ECR](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45354242170)
+- [Node.js CI](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45356623282)
+- [Docker Build and Test](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45356623152)
+- [Publish Docker image to GHCR](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45356623147)
+- [Build and Push to Amazon ECR](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45356623225)
 
 ## Application
 
