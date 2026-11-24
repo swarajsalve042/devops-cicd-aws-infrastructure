@@ -1,0 +1,29 @@
+groups:
+  - name: demo-app-alerts
+    rules:
+      - alert: DemoAppTargetDown
+        expr: up{job="demo-app"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: Demo application target is down
+          description: Prometheus cannot scrape the application for over one minute.
+      - alert: DemoAppHighErrorRate
+        expr: |
+          (sum(rate(demo_http_requests_total{status=~"5.."}[5m])) / clamp_min(sum(rate(demo_http_requests_total[5m])), 0.001)) > 0.05
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: HTTP 5xx ratio exceeds 5 percent
+          description: Five-minute application error ratio is above threshold.
+      - alert: DemoAppHighLatency
+        expr: |
+          histogram_quantile(0.95, sum by (le) (rate(demo_http_request_duration_seconds_bucket[5m]))) > 0.5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: Application p95 latency is high
+          description: Estimated p95 latency exceeds 500 milliseconds.
