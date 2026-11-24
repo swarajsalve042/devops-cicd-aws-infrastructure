@@ -1,0 +1,78 @@
+name: Kubernetes Deployment Smoke Test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'app.js'
+      - 'Dockerfile'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'k8s/**'
+      - '.github/workflows/kubernetes-smoke-test.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'app.js'
+      - 'Dockerfile'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'k8s/**'
+      - '.github/workflows/kubernetes-smoke-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-to-ephemeral-kind:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create temporary Kubernetes cluster
+        uses: helm/kind-action@v1.10.0
+        with:
+          cluster_name: nodejs-ci
+
+      - name: Build application container
+        run: docker build -t nodejs-app:ci .
+
+      - name: Load image into Kind
+        run: kind load docker-image nodejs-app:ci --name nodejs-ci
+
+      - name: Apply Kubernetes manifests
+        run: kubectl apply -f k8s/deployment-ci.yaml
+
+      - name: Wait for two replicas to become ready
+        run: kubectl rollout status deployment/nodejs-app --timeout=180s
+
+      - name: Verify pods and service
+        run: |
+          kubectl get deployment nodejs-app
+          kubectl get pods -l app=nodejs-app
+          kubectl get service nodejs-app
+          test "$(kubectl get deployment nodejs-app -o jsonpath='{.status.readyReplicas}')" = "2"
+
+      - name: Verify application through Kubernetes Service
+        shell: bash
+        run: |
+          set -euo pipefail
+          kubectl port-forward service/nodejs-app 8080:3000 >/tmp/nodejs-port-forward.log 2>&1 &
+          PF_PID=$!
+          cleanup() {
+            kill "$PF_PID" 2>/dev/null || true
+            cat /tmp/nodejs-port-forward.log || true
+          }
+          trap cleanup EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:8080/health; then
+              echo
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Kubernetes Service health check failed"
+          exit 1
