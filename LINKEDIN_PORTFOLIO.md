@@ -18,11 +18,14 @@ Built a Node.js demo app and CI/CD workflows that test the app, build Docker ima
 - Terraform formatting, initialization without backend, and validation passed.
 - Ansible playbook syntax validation passed.
 - Kubernetes manifest schema validation passed.
+- A temporary Kind Kubernetes cluster deployed two replicas; rollout completed and the Kubernetes Service health endpoint passed. The cluster was removed after the test.
 - Jenkinsfile Groovy syntax parsing passed.
 
-**Not performed:** No live Jenkins controller execution, Terraform apply, Ansible host configuration, Kubernetes cluster deployment, or ECS service launch. ECS service launch remains intentionally paused under the user's ₹0 deployment-test budget. The ECR publishing workflow is now manual-only to avoid unplanned AWS image uploads and storage charges. The app is not claimed to be live on ECS.
+**Not performed:** No live Jenkins controller execution, Terraform apply, Ansible host configuration on real hosts, production Kubernetes/EKS deployment, or ECS service launch. ECS service launch remains intentionally paused under the user's ₹0 deployment-test budget. The ECR publishing workflow is now manual-only to avoid unplanned AWS image uploads and storage charges. The app is not claimed to be live on ECS.
 
-**Technologies:** AWS IAM/OIDC, Amazon ECR, ECS/Fargate configuration, GitHub Actions, Docker, Node.js, Terraform, Kubernetes, Ansible, Jenkins.
+**Technologies:** AWS IAM/OIDC, Amazon ECR, ECS/Fargate configuration, GitHub Actions, Docker, Node.js, Terraform, Kubernetes/Kind, Ansible, Jenkins.
+
+Kubernetes smoke-test evidence: https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45363355524
 
 Evidence: https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions
 
