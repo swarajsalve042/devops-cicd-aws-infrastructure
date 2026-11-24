@@ -47,5 +47,7 @@ const server=http.createServer((req,res)=>{
   res.writeHead(status,{'content-type':type,'cache-control':'no-store'});res.end(body);
   if(url.pathname!=='/metrics') record(url.pathname,status,(performance.now()-start)/1000);
 });
-if (require.main === module) {\n  server.listen(PORT,'0.0.0.0',()=>process.stdout.write('observability-demo-app listening on '+PORT+'\n'));\n}
+if (require.main === module) {
+  server.listen(PORT,'0.0.0.0',()=>process.stdout.write('observability-demo-app listening on '+PORT+'\n'));
+}
 module.exports={server,metrics};
