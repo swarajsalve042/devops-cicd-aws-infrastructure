@@ -1,9 +1,8 @@
 name: Build and Push Node.js Image to Amazon ECR
 
+# Manual-only to prevent unplanned AWS ECR uploads and storage charges.
+# Run only after reviewing AWS cost impact and explicitly approving the push.
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
