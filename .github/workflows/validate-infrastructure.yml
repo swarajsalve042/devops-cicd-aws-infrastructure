@@ -65,3 +65,14 @@ jobs:
           docker run --rm -v "${{ github.workspace }}:/work" -w /work \
             ghcr.io/yannh/kubeconform:v0.6.7 \
             -strict -summary k8s/deployment.yaml
+
+  jenkinsfile:
+    name: Jenkinsfile Groovy syntax check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Parse Jenkinsfile without executing pipeline
+        run: |
+          docker run --rm -v "${{ github.workspace }}:/work" -w /work groovy:4.0-jdk17 \
+            groovy -e 'new GroovyShell().parse(new File("Jenkinsfile")); println("Jenkinsfile Groovy syntax is valid")'
