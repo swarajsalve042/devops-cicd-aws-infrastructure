@@ -33,7 +33,7 @@ Latest verified workflow runs:
 2. GitHub Actions checks out the repository and runs Node.js tests.
 3. Docker workflow builds the image, starts a container, and checks the health endpoint.
 4. GHCR workflow publishes the image to GitHub Container Registry.
-5. AWS workflow assumes the IAM role using GitHub OIDC, logs in to Amazon ECR, and pushes versioned and `latest` image tags.
+5. The AWS ECR publishing workflow can be run manually after reviewing cost impact and receiving approval; it assumes the IAM role using GitHub OIDC, logs in to Amazon ECR, and pushes versioned and `latest` image tags.
 
 ### AWS image repository
 
@@ -94,6 +94,8 @@ Terraform, Kubernetes, and Ansible checks should be run only after their tools a
 
 ## Security and cost
 
+- Amazon ECR publishing is manual-only; routine GitHub pushes do not upload new AWS images.
+- ECS service launch and all other billable deployment steps remain paused under the ₹0 deployment-test budget.
 - Never commit AWS keys, passwords, tokens, private keys, or kubeconfig files.
 - Prefer short-lived OIDC credentials and least-privilege IAM permissions.
 - Review AWS resource types, region, network exposure, and cost before launching.
