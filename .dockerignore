@@ -1,0 +1,12 @@
+.git
+.github
+node_modules
+test
+docs
+terraform
+ansible
+k8s
+*.md
+.env
+.env.*
+npm-debug.log*
