@@ -1,29 +1,38 @@
 pipeline {
   agent any
 
+  environment {
+    IMAGE_NAME = 'devops-cicd-aws-demo'
+  }
+
   stages {
     stage('Checkout') {
       steps {
-        git '<GITHUB_REPOSITORY_URL>'
+        checkout scm
       }
     }
 
-    stage('Build & Test') {
+    stage('Install and Test') {
       steps {
-        sh 'npm ci && npm test'
+        sh 'node --version'
+        sh 'npm ci'
+        sh 'npm test'
       }
     }
 
-    stage('Docker Build') {
+    stage('Build Docker Image') {
       steps {
-        sh 'docker build -t analytics-app:' + '$' + '{BUILD_NUMBER} .'
+        sh 'docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} .'
       }
     }
+  }
 
-    stage('Deploy') {
-      steps {
-        sh 'kubectl apply -f k8s/deployment.yaml'
-      }
+  post {
+    success {
+      echo 'CI pipeline completed: tests passed and Docker image built locally.'
+    }
+    failure {
+      echo 'CI pipeline failed. Review the stage logs.'
     }
   }
 }
