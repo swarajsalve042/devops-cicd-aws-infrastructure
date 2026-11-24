@@ -47,13 +47,13 @@ Jenkinsfile syntax validation https://github.com/swarajsalve042/devops-lifecycle
 
 Retained the assignment material and added an independent Node.js sample application because the referenced external hshar/webapp source was not present in the repository. Added automated tests, Docker packaging, a Jenkins pipeline, a CodeBuild buildspec, and deployment-scope documentation.
 
-**Verified:** GitHub Actions tests passed, Docker image built, temporary container started, and /health endpoint passed. The workflow removed the temporary container after testing.
+**Verified:** GitHub Actions parsed the Jenkinsfile as Groovy, passed application tests, built the Docker image, started a temporary container, and passed the /health smoke test. The workflow removed the temporary container after testing.
 
 **Not performed:** No production deployment, live Jenkins execution, or AWS CodeBuild project execution. The sample app is an independent demonstration, not the original external application.
 
 **Technologies:** Node.js, GitHub Actions, Jenkins pipeline configuration, Docker, AWS CodeBuild buildspec.
 
-Evidence: https://github.com/swarajsalve042/abode-devops-lifecycle/actions/runs/45356279393
+Evidence: https://github.com/swarajsalve042/abode-devops-lifecycle/actions/runs/45362757999
 
 ## 4. AdventureWorks2012 SQL Server Analysis
 
