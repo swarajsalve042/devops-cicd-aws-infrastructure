@@ -1,145 +1,104 @@
-# DevOps CI/CD & AWS Infrastructure Project
+# DevOps CI/CD & AWS Infrastructure
 
-A hands-on DevOps learning project that brings together source control, CI/CD automation, containerization, Kubernetes deployment, Infrastructure as Code, and configuration management.
+A hands-on DevOps project demonstrating a Node.js application, automated testing, Docker containerization, image publishing to Amazon ECR and GitHub Container Registry, and AWS deployment preparation.
 
-> **Project status: In progress.** This repository currently contains starter configurations and an intended architecture. AWS infrastructure, CI/CD execution, container image publishing, and Kubernetes deployment have not yet been verified. Do not interpret the configuration files as proof of a successful deployment.
+## Verified implementation
 
-## Project objectives
+The following GitHub Actions workflows have completed successfully on the `main` branch:
 
-- Manage application source code with Git and GitHub.
-- Define a Jenkins pipeline for checkout, build/test, Docker image creation, and deployment.
-- Prepare an AWS CodeBuild workflow.
-- Package a Node.js application with Docker.
-- Describe a Kubernetes Deployment with two replicas and a NodePort Service.
-- Provision AWS infrastructure with Terraform.
-- Configure Linux machines with Ansible.
-
-## Technology stack
-
-| Tool | Intended role |
+| Workflow | Verified result |
 |---|---|
-| Git & GitHub | Version control and source repository |
-| Jenkins | CI/CD pipeline orchestration |
-| AWS CodeBuild | Managed build automation |
-| Docker | Application containerization |
-| Kubernetes | Container orchestration |
-| Terraform | Infrastructure as Code |
-| Ansible | Configuration management |
-| AWS EC2 | Compute infrastructure |
+| Node.js CI | Dependencies installed and automated tests passed |
+| Docker Build and Test | Docker image built; container started; `/health` endpoint returned the expected response |
+| Publish Docker image to GHCR | Container image built and published to GitHub Container Registry |
+| Build and Push Node.js Image to Amazon ECR | GitHub OIDC authentication succeeded; image built, tagged, and pushed to ECR |
 
-## Intended architecture
+Latest verified workflow runs:
+- [Node.js CI](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45354242028)
+- [Docker Build and Test](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45354242019)
+- [Publish Docker image to GHCR](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45354242059)
+- [Build and Push to Amazon ECR](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45354242170)
 
-```mermaid
-flowchart TD
-    A[Developer] --> B[GitHub]
-    B --> C[Jenkins pipeline]
-    B --> D[AWS CodeBuild]
-    C --> E[Build and test]
-    D --> E
-    E --> F[Docker image]
-    F --> G[Kubernetes deployment]
-    G --> H[Replica 1]
-    G --> I[Replica 2]
-    J[Terraform] --> K[AWS infrastructure]
-    L[Ansible] --> K
-```
+## Application
 
-The Jenkins and CodeBuild paths are planned integrations; they are not yet connected or validated end to end.
+- Node.js HTTP application listens on port 3000.
+- `/` displays the project demo page.
+- `/health` returns JSON with service health.
+- Automated tests are located in `test/app.test.js`.
+- Node.js 20 is used in CI and the Docker image.
+
+## CI/CD workflow
+
+1. Code is stored in GitHub.
+2. GitHub Actions checks out the repository and runs Node.js tests.
+3. Docker workflow builds the image, starts a container, and checks the health endpoint.
+4. GHCR workflow publishes the image to GitHub Container Registry.
+5. AWS workflow assumes the IAM role using GitHub OIDC, logs in to Amazon ECR, and pushes versioned and `latest` image tags.
+
+### AWS image repository
+
+- Region: `ap-south-1`
+- ECR repository: `nodejs-app`
+- Image URI: `079131597175.dkr.ecr.ap-south-1.amazonaws.com/nodejs-app`
+- Authentication: GitHub Actions OIDC and IAM role `GitHubActionsECRPushRole`
+
+No long-lived AWS access key is stored in the repository.
 
 ## Repository structure
 
 ```text
 .
-├── README.md
-├── Jenkinsfile
+├── .github/workflows/
+│   ├── deploy-ecr.yml
+│   ├── docker.yml
+│   ├── nodejs.yml
+│   └── publish-ghcr.yml
+├── app.js
+├── test/app.test.js
+├── package.json
+├── package-lock.json
 ├── Dockerfile
-├── k8s/
-│   └── deployment.yaml
+├── Jenkinsfile
+├── k8s/deployment.yaml
 ├── terraform/
-│   ├── main.tf
-│   └── variables.tf
-├── ansible/
-│   └── site.yml
-└── docs/
-    └── architecture.md
+└── ansible/
 ```
 
-## Configuration currently present
+## Deployment status and remaining work
 
-- **Jenkinsfile:** Checkout, Build & Test, Docker Build, and Deploy stages.
-- **Dockerfile:** Uses Node.js 20 Alpine, installs production dependencies, copies application files, exposes port 3000, and starts the app with `npm start`.
-- **Kubernetes manifest:** Defines a Deployment with two replicas and a NodePort Service configured for port 30008.
-- **Terraform:** Configures the AWS provider and one EC2 controller instance. The AMI ID is supplied through a variable.
-- **Ansible:** Installs Docker and ensures the Docker service is started and enabled.
+**Verified:** CI tests, Docker build and container health check, GHCR publishing, and Amazon ECR image publishing.
 
-## Important items to complete before deployment
+**Prepared but not yet verified end to end:**
+- Jenkins pipeline execution on a configured Jenkins agent.
+- Terraform validation and any infrastructure provisioning.
+- Ansible syntax and execution against real hosts.
+- Kubernetes manifest validation and deployment to a cluster.
+- ECS/Fargate service launch and public application endpoint.
 
-The following gaps are known and must be resolved before an end-to-end run:
+An ECS cluster and Fargate task definition were created during the learning exercise. ECS service creation was deliberately paused before launch to avoid unexpected AWS charges. The application is not currently confirmed live on ECS.
 
-1. Add a real application source and its `package.json` with valid `npm ci`, test, and start scripts.
-2. Replace the placeholder GitHub URL in the Jenkinsfile and configure Jenkins credentials securely.
-3. Add and configure an AWS CodeBuild `buildspec.yml`, then connect the intended source trigger.
-4. Build and publish the Docker image to a real container registry; replace the placeholder image in the Kubernetes manifest.
-5. Review the Kubernetes cluster, image pull permissions, service exposure, and deployment settings.
-6. Supply a valid AMI ID and review the Terraform resources, networking, security groups, state, and cost before applying.
-7. Review Ansible inventory, privilege requirements, and OS-specific package/service names.
-8. Add execution evidence only after each step succeeds.
+## Safe validation
 
-## Safe setup and validation plan
-
-Run these checks in the appropriate environment after installing the tools:
+Run locally after installing Node.js 20 and Docker:
 
 ```bash
-git clone https://github.com/swarajsalve042/devops-cicd-aws-infrastructure.git
-cd devops-cicd-aws-infrastructure
-
-# Inspect repository contents
-git status
-find . -maxdepth 3 -type f
+npm ci
+npm test
+docker build -t devops-cicd-aws-demo:local .
+docker run --rm -p 3000:3000 devops-cicd-aws-demo:local
 ```
 
-Validate individual components only after their prerequisites are configured:
+In another terminal, check `http://localhost:3000/health`.
 
-```bash
-# Terraform syntax and configuration checks
-terraform fmt -check -recursive
-terraform init -backend=false
-terraform validate
+Terraform, Kubernetes, and Ansible checks should be run only after their tools and required configuration are available. Review any cloud plan and estimated charges before provisioning resources.
 
-# Ansible syntax check (requires a valid inventory)
-ansible-playbook -i inventory.ini ansible/site.yml --syntax-check
+## Security and cost
 
-# Kubernetes manifest client-side validation (requires kubectl)
-kubectl apply --dry-run=client -f k8s/deployment.yaml
-```
-
-These are validation commands, not deployment commands. A successful local syntax check does not prove that AWS resources or Kubernetes workloads are running.
-
-## Deployment verification checklist
-
-- [ ] Application builds and tests successfully.
-- [ ] Jenkins pipeline completes successfully.
-- [ ] CodeBuild build completes successfully.
-- [ ] Docker image is built and pushed to the configured registry.
-- [ ] Terraform plan is reviewed and approved before apply.
-- [ ] AWS resources are visible and in the expected state.
-- [ ] Kubernetes Deployment reports two available replicas.
-- [ ] Kubernetes Service exposes the expected port.
-- [ ] Application responds successfully through the configured endpoint.
-
-## Security and cost notes
-
-- Never commit AWS access keys, passwords, tokens, private keys, kubeconfig files, or other secrets.
-- Use GitHub Actions/Jenkins/AWS secret stores or IAM roles as appropriate; grant only the permissions required.
-- Review AWS region, instance type, networking, public exposure, and estimated charges before provisioning.
-- Destroy temporary resources when they are no longer needed, after confirming that doing so is safe.
-
-## Learning outcomes
-
-This project is intended to build practical skills in Git workflows, CI/CD concepts, Docker image creation, Kubernetes manifests, Terraform, Ansible, and AWS cloud operations.
+- Never commit AWS keys, passwords, tokens, private keys, or kubeconfig files.
+- Prefer short-lived OIDC credentials and least-privilege IAM permissions.
+- Review AWS resource types, region, network exposure, and cost before launching.
+- Stop or delete temporary billable resources when no longer required.
 
 ## Maintainer
 
-**GitHub:** [@swarajsalve042](https://github.com/swarajsalve042)
-
-Feedback and suggestions are welcome. The repository will be updated as each component is implemented and verified.
+**Swaraj Salve** — [GitHub profile](https://github.com/swarajsalve042)
