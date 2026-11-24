@@ -56,10 +56,17 @@ jobs:
         run: |
           curl --fail --silent http://127.0.0.1:3000/api/orders >/dev/null
           for attempt in $(seq 1 12); do
-            if curl --fail --silent 'http://127.0.0.1:9090/api/v1/query?query=up%7Bjob%3D%22demo-app%22%7D' | grep -q '"status":"success"'; then break; fi
+            up_result=$(curl --fail --silent 'http://127.0.0.1:9090/api/v1/query?query=up%7Bjob%3D%22demo-app%22%7D')
+            if echo "$up_result" | jq -e '.status == "success" and .data.result[0].value[1] == "1"' >/dev/null; then break; fi
             sleep 5
           done
-          curl --fail --silent 'http://127.0.0.1:9090/api/v1/query?query=demo_http_requests_total' | grep -q '"status":"success"'
+          echo "$up_result" | jq -e '.status == "success" and .data.result[0].value[1] == "1"'
+          for attempt in $(seq 1 12); do
+            metric_result=$(curl --fail --silent 'http://127.0.0.1:9090/api/v1/query?query=demo_http_requests_total')
+            if echo "$metric_result" | jq -e '.status == "success" and (.data.result | length) > 0' >/dev/null; then break; fi
+            sleep 5
+          done
+          echo "$metric_result" | jq -e '.status == "success" and (.data.result | length) > 0'
       - name: Run smoke tests
         working-directory: observability
         run: bash tests/smoke-test.sh
