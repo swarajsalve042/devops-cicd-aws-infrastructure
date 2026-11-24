@@ -10,6 +10,7 @@ The following GitHub Actions workflows have completed successfully on the `main`
 |---|---|
 | Node.js CI | Dependencies installed and automated tests passed |
 | Docker Build and Test | Docker image built; container started; `/health` endpoint returned the expected response |
+| Kubernetes Deployment Smoke Test | Temporary Kind cluster created; two replicas became ready; Kubernetes Service `/health` check passed |
 | Publish Docker image to GHCR | Container image built and published to GitHub Container Registry |
 | Build and Push Node.js Image to Amazon ECR | GitHub OIDC authentication succeeded; image built, tagged, and pushed to ECR |
 
@@ -66,7 +67,9 @@ No long-lived AWS access key is stored in the repository.
 
 ## Deployment status and remaining work
 
-**Verified:** CI tests, Docker build and container health check, GHCR publishing, and Amazon ECR image publishing.
+**Verified:** CI tests, Docker build and container health check, GHCR publishing, Amazon ECR image publishing, and a two-replica Kubernetes deployment to an ephemeral Kind cluster. The temporary cluster was removed after the successful smoke test. [Kubernetes deployment run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45363355524).
+
+The Kind test proves the manifest and application can run on a temporary local Kubernetes cluster; it does not mean an AWS EKS or other production cluster is deployed.
 
 **Prepared but not yet verified end to end:**
 - Jenkins pipeline execution on a configured Jenkins agent.
