@@ -32,13 +32,14 @@ Evidence: https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actio
 
 Built a Node.js application with automated tests and a /health endpoint. Added a Docker workflow and a declarative Jenkinsfile for checkout, dependency installation, tests, and Docker image build.
 
-**Verified:** GitHub Actions completed successfully: dependencies installed, tests passed, Docker image built, container started, and /health smoke test passed.
+**Verified:** GitHub Actions completed successfully: dependencies installed, tests passed, Docker image built, container started, and /health smoke test passed. The Jenkinsfile also passed Groovy syntax validation in GitHub Actions.
 
-**Not yet verified:** Execution of the Jenkinsfile on a real Jenkins controller/agent.
+**Not yet verified:** Execution of the Jenkinsfile on a real Jenkins controller/agent. A Jenkinsfile Runner setup was attempted, but its external plugin downloads failed before the pipeline could start; no Jenkins pipeline execution is claimed.
 
 **Technologies:** Node.js, JavaScript, Git, GitHub Actions, Jenkins, Docker.
 
-Evidence: https://github.com/swarajsalve042/devops-lifecycle-jenkins-docker-github/actions/runs/45355619161
+Evidence: Node.js/Docker CI https://github.com/swarajsalve042/devops-lifecycle-jenkins-docker-github/actions/runs/45358590955
+Jenkinsfile syntax validation https://github.com/swarajsalve042/devops-lifecycle-jenkins-docker-github/actions/runs/45362500114
 
 ## 3. Abode Software DevOps Lifecycle Assignment
 
