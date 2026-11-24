@@ -58,15 +58,20 @@ Evidence: https://github.com/swarajsalve042/abode-devops-lifecycle/actions/runs/
 
 **Repository:** https://github.com/swarajsalve042/querying-large-relational-database
 
-Created seven T-SQL analysis queries covering person contact details, May 2011 sales orders and line items, total sales, monthly sales ranking, month-on-month changes using LAG(), and sales for Gustavo Achong.
+Created seven T-SQL analysis queries covering person contact details, July 2005 sales orders and line items, total sales, 2006 monthly sales ranking, month-on-month changes using LAG(), and sales for Gustavo Achong.
 
-**Verified:** GitHub Actions SQLFluff T-SQL parsing completed successfully.
+**Verified against the official database:** A GitHub Actions job started a temporary SQL Server Developer container, restored Microsoft's official AdventureWorks2012 backup, executed all seven queries, saved the output artifact, and removed the container. The run completed successfully.
 
-**Not yet verified:** Running the queries against the full restored AdventureWorks2012 database. No numeric sales outputs are fabricated; run the script in SQL Server/SSMS against the official database before presenting result values.
+**Actual results:** 19,972 person/contact rows; 184 July 2005 orders; 498 July 2005 line items; July 2005 total sales 1,074,117.4188; 12 monthly rows for 2006; Gustavo Achong (CustomerID 29484) total sales 147,804.9208.
+
+**Data-quality correction:** The restored AdventureWorks2012 backup contains 31,465 orders dated 2005-07-01 through 2008-07-31 and no May 2011 sales. The original 2011 filters were corrected to use real dates in the dataset.
+
+Evidence: https://github.com/swarajsalve042/querying-large-relational-database/actions/runs/45357844364
+Results artifact: https://github.com/swarajsalve042/querying-large-relational-database/actions/runs/45357844364/artifacts/14903331970
 
 **Technologies:** Microsoft SQL Server, SSMS, T-SQL, joins, aggregation, CTEs, date filtering, window functions.
 
-Evidence: https://github.com/swarajsalve042/querying-large-relational-database/actions
+Evidence: https://github.com/swarajsalve042/querying-large-relational-database/actions/runs/45357844364
 
 ---
 
@@ -75,7 +80,7 @@ Evidence: https://github.com/swarajsalve042/querying-large-relational-database/a
 - Lead with Project 1 for AWS OIDC, ECR publishing, and infrastructure validation.
 - Use Project 2 to demonstrate an application CI and Docker runtime smoke test.
 - Present Project 3 as an independently built CI/Docker sample based on the assignment.
-- Present Project 4 as a SQL analysis project with successful T-SQL parser validation.
+- Present Project 4 as a SQL analysis project with successful execution of all seven queries against the official AdventureWorks2012 database.
 
 ## GitHub Profile
 
