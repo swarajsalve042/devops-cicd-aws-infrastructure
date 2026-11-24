@@ -1,0 +1,50 @@
+name: Docker Build and Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  docker-test:
+    name: Build and test Docker container
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build --tag devops-cicd-aws-demo:test .
+
+      - name: Run container and verify health endpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          docker run --detach \
+            --name devops-cicd-aws-demo-test \
+            --publish 127.0.0.1:3000:3000 \
+            devops-cicd-aws-demo:test
+
+          cleanup() {
+            docker logs devops-cicd-aws-demo-test || true
+            docker rm --force devops-cicd-aws-demo-test || true
+          }
+          trap cleanup EXIT
+
+          for attempt in {1..15}; do
+            if response="$(curl --fail --silent http://127.0.0.1:3000/health)"; then
+              echo "Health endpoint response: $response"
+              if [ "$response" != '{"status":"ok","service":"devops-cicd-aws-demo"}' ]; then
+                echo "Unexpected health response."
+                exit 1
+              fi
+              echo "Docker container health check passed."
+              exit 0
+            fi
+            sleep 2
+          done
+
+          echo "Container did not become healthy in time."
+          exit 1
