@@ -107,3 +107,7 @@ Terraform, Kubernetes, and Ansible checks should be run only after their tools a
 ## Maintainer
 
 **Swaraj Salve** — [GitHub profile](https://github.com/swarajsalve042)
+
+## Monitoring & Observability Lab
+
+An advanced Prometheus and Grafana monitoring lab is maintained in [`observability/`](observability/README.md). It includes a Node.js metrics-instrumented service, Prometheus scrape configuration and alert rules, a provisioned Grafana dashboard, Docker Compose orchestration, and a GitHub Actions end-to-end validation workflow. The lab uses no AWS resources and is tested separately from the existing CI/CD application.
