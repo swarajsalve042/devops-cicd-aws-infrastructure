@@ -1,0 +1,3 @@
+package com.portfolio.employee;
+import jakarta.persistence.*;
+@Entity public class Employee {@Id @GeneratedValue(strategy=GenerationType.IDENTITY) private Long id;private String name;private String department;private String email;protected Employee(){}public Employee(String name,String department,String email){this.name=name;this.department=department;this.email=email;}public Long getId(){return id;}public String getName(){return name;}public String getDepartment(){return department;}public String getEmail(){return email;}public void setName(String v){name=v;}public void setDepartment(String v){department=v;}public void setEmail(String v){email=v;}}
