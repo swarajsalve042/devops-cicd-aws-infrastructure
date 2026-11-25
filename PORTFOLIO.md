@@ -66,7 +66,7 @@ Two SQL work areas in one repository:
 
 - **Latest AdventureWorks full execution:** [Successful SQL Server run #6](https://github.com/swarajsalve042/querying-large-relational-database/actions/runs/45357844364) against Microsoft's official AdventureWorks2012 sample database.
 - **Repository:** [querying-large-relational-database](https://github.com/swarajsalve042/querying-large-relational-database)
-- **Zomato project folder:** [zomato-sql-project](https://github.com/swarajsalve042/querying-large-relational-database/tree/main/zomato-sql-project) · [Successful MySQL 8 execution and assertions](https://github.com/swarajsalve042/querying-large-relational-database/actions/runs/45573446076).
+- **Zomato project folder:** [zomato-sql-project](https://github.com/swarajsalve042/querying-large-relational-database/tree/main/zomato-sql-project) · [Successful MySQL 8 execution and assertions](https://github.com/swarajsalve042/querying-large-relational-database/actions/runs/45573588501).
 
 *Boundary: AdventureWorks queries run against Microsoft's official sample backup. Zomato SQL is executed against a small fictional fixture to validate the function, max-vote selection, rating bands and ROLLUP; it is not analysis of the original Zomato production dataset.*
 
