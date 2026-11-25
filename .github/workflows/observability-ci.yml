@@ -33,8 +33,8 @@ jobs:
       - name: Validate Prometheus config and alert rules
         working-directory: observability
         run: |
-          docker run --rm -v "$PWD/prometheus:/etc/prometheus:ro" prom/prometheus:v2.54.1 promtool check config /etc/prometheus/prometheus.yml
-          docker run --rm -v "$PWD/prometheus:/etc/prometheus:ro" prom/prometheus:v2.54.1 promtool check rules /etc/prometheus/alerts.yml
+          docker run --rm --entrypoint promtool -v "$PWD/prometheus:/etc/prometheus:ro" prom/prometheus:v2.54.1 check config /etc/prometheus/prometheus.yml
+          docker run --rm --entrypoint promtool -v "$PWD/prometheus:/etc/prometheus:ro" prom/prometheus:v2.54.1 check rules /etc/prometheus/alerts.yml
       - name: Build application image
         working-directory: observability
         run: docker build -t observability-demo-app:ci ./app
