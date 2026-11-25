@@ -50,9 +50,9 @@ The error endpoint is intentionally included for testing, not a real incident ge
 - DemoAppHighLatency: p95 latency above 500 ms for five minutes.
 
 ## Verified CI
-The full Observability Platform CI workflow completed successfully on GitHub Actions run #9 (commit `237acf5b44086c67cd025ff0d5d269cff4cb304c`). Verified steps include application unit tests, Compose validation, Prometheus configuration and alert-rule validation, Docker image build, stack startup, service readiness, Prometheus scrape/metrics checks, and smoke tests. The runner then cleaned up the temporary stack.
+The full Observability Platform CI workflow completed successfully on the latest verified GitHub Actions run (commit `acecb67f6bef899e56e37b4715cb5a7c28d59741`). Verified steps include application unit tests, Compose validation, Prometheus configuration and alert-rule validation, Docker image build, stack startup, service readiness, Prometheus scrape/metrics checks, and smoke tests. The runner then cleaned up the temporary stack.
 
-[View the successful CI run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45566731453).
+[View the successful CI run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45574427469).
 
 A successful GitHub Actions run verifies this workflow on a temporary runner. It does not mean a permanent server, cloud deployment, notification channel or production monitoring service is running.
 
