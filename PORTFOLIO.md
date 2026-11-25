@@ -91,7 +91,7 @@ A hospital administration demo with staff login, patient and doctor directories,
 - **PHP syntax validation:** [Successful run #7](https://github.com/swarajsalve042/online-medical-hospital-management-system/actions/runs/45453061485).
 - **Repository:** [online-medical-hospital-management-system](https://github.com/swarajsalve042/online-medical-hospital-management-system)
 
-<text>**Verification warning:** The latest PHP syntax workflow passed, but the separate PHP/MySQL integration workflow currently fails at the login/application-page verification step. Runtime integration is therefore not yet verified. This is a demo only—never use real patient data or production billing.</text>
+**Verification warning:** The latest PHP syntax workflow passed, but the separate PHP/MySQL integration workflow currently fails at the login/application-page verification step. Runtime integration is therefore not yet verified. This is a demo only—never use real patient data or production billing.
 
 ### 8. E-Commerce Web Application
 **Java 17 · Spring Boot · Spring Data JPA · H2 · Maven**
