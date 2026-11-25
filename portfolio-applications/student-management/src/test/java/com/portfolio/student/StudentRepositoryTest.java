@@ -1,0 +1,3 @@
+package com.portfolio.student;
+import org.junit.jupiter.api.Test;import static org.junit.jupiter.api.Assertions.*;
+class StudentRepositoryTest {@Test void createListDelete()throws Exception{StudentRepository r=new StudentRepository("jdbc:h2:mem:students;DB_CLOSE_DELAY=-1");r.initialize();long id=r.add("Asha","asha@example.test","Computer Science");assertEquals(1,r.findAll().size());assertTrue(r.findAll().get(0).contains("Asha"));assertTrue(r.delete(id));assertTrue(r.findAll().isEmpty());}}
