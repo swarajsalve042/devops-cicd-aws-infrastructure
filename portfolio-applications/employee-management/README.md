@@ -1,7 +1,24 @@
 # Employee Management System
 
-Java and Spring Boot employee-record management REST API.
+A Java 17 and Spring Boot REST API for employee records.
 
-Planned features: create, list, retrieve, update and delete employee records using Spring Data JPA and an H2 development database.
+## Implemented
+- Create, list and retrieve employee records.
+- Update employee details.
+- Delete employees by ID.
+- Spring Data JPA with H2 in-memory database.
+- REST API under `/api/employees`.
 
-Run and test instructions will be updated after implementation and CI checks. Authentication and production deployment are not claimed.
+## Run
+```bash
+mvn spring-boot:run
+```
+Base URL: `http://localhost:8080/api/employees`.
+
+## Test
+```bash
+mvn test
+```
+GitHub Actions runs the Maven test suite on Java 17.
+
+Scope: CRUD learning project. Authentication, role-based access, advanced validation and production database configuration are not implemented.
