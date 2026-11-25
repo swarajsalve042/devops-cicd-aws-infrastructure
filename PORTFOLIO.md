@@ -18,11 +18,12 @@ This landing page covers **all 9 public repositories** currently found in my Git
 
 A reproducible DevOps lifecycle assignment with an independent Node.js demo app, health endpoint, automated tests, Docker image build, temporary container health check, Jenkinsfile Groovy syntax validation, and a CodeBuild buildspec.
 
-- **Latest CI:** [Successful run #10](https://github.com/swarajsalve042/abode-devops-lifecycle/actions/runs/45362930108) — Jenkinsfile syntax, Node.js tests, Docker build and temporary container health check.
+- **Latest CI:** [Successful application/Docker run](https://github.com/swarajsalve042/abode-devops-lifecycle/actions/runs/45573501207) — Jenkinsfile syntax, Node.js tests, Docker build and temporary container health check.
+- **SQL validation:** [Successful SQL Server execution](https://github.com/swarajsalve042/abode-devops-lifecycle/actions/runs/45573290565) — executes ABC Fashion sales orders, relational design, and Zomato T-SQL against a temporary SQL Server with fictional test data.
 - **Repository:** [abode-devops-lifecycle](https://github.com/swarajsalve042/abode-devops-lifecycle)
-- **Extra SQL assignments in this repository:** [ABC Fashion Sales Order Processing](https://github.com/swarajsalve042/abode-devops-lifecycle/tree/main/abc-fashion-sales-order) and [SQL Server Relational Design](https://github.com/swarajsalve042/abode-devops-lifecycle/tree/main/sql-server-relational-design).
+- **SQL assignments:** [ABC Fashion Sales Order Processing](https://github.com/swarajsalve042/abode-devops-lifecycle/tree/main/abc-fashion-sales-order), [SQL Server Relational Design](https://github.com/swarajsalve042/abode-devops-lifecycle/tree/main/sql-server-relational-design), and [Zomato T-SQL Analytics](https://github.com/swarajsalve042/abode-devops-lifecycle/tree/main/zomato-sql-data-analytics).
 
-*Boundary: CI validates the sample application and Docker container. The original external image referenced by the assignment is not included; no live Jenkins or AWS CodeBuild execution, nor production deployment, is claimed.*
+*Boundary: The original external image referenced by the assignment is not included. Jenkinsfile syntax is validated, but a separate Jenkins controller/agent and AWS CodeBuild project have not been run; no production deployment is claimed.*
 
 ### 2. Expense Tracker Web Application
 **Node.js · JavaScript · REST API · Node Test Runner · GitHub Actions**
@@ -50,10 +51,11 @@ A separate beginner-friendly CI pipeline repository demonstrating source control
 
 REST API to create, list, retrieve, update, and delete employee records.
 
-- **Latest CI:** [Successful run #8](https://github.com/swarajsalve042/Employee-Management-System/actions/runs/45571288955).
+- **Latest CI:** [Successful Maven integration-test run](https://github.com/swarajsalve042/Employee-Management-System/actions/runs/45572942390).
+- **Automated coverage:** employee create, list, retrieve, update, delete, missing-record handling, and invalid-input responses (2 integration tests, 0 failures).
 - **Repository:** [Employee-Management-System](https://github.com/swarajsalve042/Employee-Management-System)
 
-*Boundary: CRUD learning project using an H2 in-memory database. Authentication, role-based access, and production database deployment are not included. CI currently runs Maven build/test; there are no dedicated application unit tests yet.*
+*Boundary: CRUD learning project using an H2 in-memory database. Authentication, role-based access, and production database deployment are not included.*
 
 ### 5. AdventureWorks & Zomato SQL Analysis
 **Microsoft SQL Server · T-SQL · MySQL · SSMS · SQL analytics**
@@ -64,9 +66,9 @@ Two SQL work areas in one repository:
 
 - **Latest AdventureWorks full execution:** [Successful SQL Server run #6](https://github.com/swarajsalve042/querying-large-relational-database/actions/runs/45357844364) against Microsoft's official AdventureWorks2012 sample database.
 - **Repository:** [querying-large-relational-database](https://github.com/swarajsalve042/querying-large-relational-database)
-- **Zomato project folder:** [zomato-sql-project](https://github.com/swarajsalve042/querying-large-relational-database/tree/main/zomato-sql-project)
+- **Zomato project folder:** [zomato-sql-project](https://github.com/swarajsalve042/querying-large-relational-database/tree/main/zomato-sql-project) · [Successful MySQL 8 execution and assertions](https://github.com/swarajsalve042/querying-large-relational-database/actions/runs/45573446076).
 
-*Boundary: The AdventureWorks workflow executed the seven analysis queries against the restored sample database. The Zomato SQL files are documented as an analysis assignment; this portfolio does not claim a verified execution against an independently provisioned Zomato dataset.*
+*Boundary: AdventureWorks queries run against Microsoft's official sample backup. Zomato SQL is executed against a small fictional fixture to validate the function, max-vote selection, rating bands and ROLLUP; it is not analysis of the original Zomato production dataset.*
 
 ### 6. DevOps CI/CD & AWS Infrastructure
 **GitHub Actions · Docker · Amazon ECR · OIDC · Kubernetes/Kind · Jenkins · Terraform · Ansible**
@@ -91,17 +93,18 @@ A hospital administration demo with staff login, patient and doctor directories,
 - **PHP syntax validation:** [Successful run #7](https://github.com/swarajsalve042/online-medical-hospital-management-system/actions/runs/45453061485).
 - **Repository:** [online-medical-hospital-management-system](https://github.com/swarajsalve042/online-medical-hospital-management-system)
 
-**Verification:** PHP syntax validation and the MySQL-backed HTTP integration workflow pass. CI verifies staff login, protected pages, patient/doctor creation, appointment scheduling, medical-note creation, invoice creation and payment status, report totals, CSRF rejection, and logout. [Latest PHP syntax run](https://github.com/swarajsalve042/online-medical-hospital-management-system/actions/runs/45572685243) · [Latest PHP/MySQL integration run](https://github.com/swarajsalve042/online-medical-hospital-management-system/actions/runs/45572685186). This remains a demo only—never use real patient data or production billing.
+**Verification:** PHP syntax validation and the MySQL-backed HTTP integration workflow pass. CI verifies staff login, protected pages, patient/doctor creation, appointment scheduling, medical-note creation, invoice creation and payment status, report totals, CSRF rejection, and logout. [Latest PHP syntax run](https://github.com/swarajsalve042/online-medical-hospital-management-system/actions/runs/45572861119) · [Latest PHP/MySQL integration run](https://github.com/swarajsalve042/online-medical-hospital-management-system/actions/runs/45572861174). This remains a demo only—never use real patient data or production billing.
 
 ### 8. E-Commerce Web Application
 **Java 17 · Spring Boot · Spring Data JPA · H2 · Maven**
 
 A product catalogue REST API supporting product creation, listing, retrieval, and deletion, with validation for product names and positive prices.
 
-- **Latest CI:** [Successful run #8](https://github.com/swarajsalve042/E-commorce-Web-application/actions/runs/45571348440).
+- **Latest CI:** [Successful Maven integration-test run](https://github.com/swarajsalve042/E-commorce-Web-application/actions/runs/45572937758).
+- **Automated coverage:** product create, list, retrieve, delete, missing-product handling, and invalid name/price responses (2 integration tests, 0 failures).
 - **Repository:** [E-commorce-Web-application](https://github.com/swarajsalve042/E-commorce-Web-application)
 
-*Boundary: Product catalogue CRUD only. Cart, checkout, payments, customer authentication, and production database configuration are not included. CI currently runs Maven build/test; dedicated application unit tests are not yet included.*
+*Boundary: Product catalogue CRUD only. Cart, checkout, payments, customer authentication, and production database configuration are not included.*
 
 ### 9. Student Management JDBC Project
 **Java 17 · JDBC · H2 · JUnit 5 · Maven**
