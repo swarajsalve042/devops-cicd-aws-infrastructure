@@ -2,6 +2,10 @@
 
 A hands-on DevOps project demonstrating a Node.js application, automated testing, Docker containerization, image publishing to Amazon ECR and GitHub Container Registry, and AWS deployment preparation.
 
+## Recruiter Portfolio
+
+A concise overview of my DevOps, AWS, monitoring, and application projects, with repository links and CI evidence: [View the project portfolio](PORTFOLIO.md).
+
 ## Verified implementation
 
 The following GitHub Actions workflows have completed successfully on the `main` branch:
