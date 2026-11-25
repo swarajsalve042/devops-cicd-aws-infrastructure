@@ -93,7 +93,7 @@ A hospital administration demo with staff login, patient and doctor directories,
 - **PHP syntax validation:** [Successful run #7](https://github.com/swarajsalve042/online-medical-hospital-management-system/actions/runs/45453061485).
 - **Repository:** [online-medical-hospital-management-system](https://github.com/swarajsalve042/online-medical-hospital-management-system)
 
-**Verification:** PHP syntax validation and the MySQL-backed HTTP integration workflow pass. CI verifies staff login, protected pages, patient/doctor creation, appointment scheduling, medical-note creation, invoice creation and payment status, report totals, CSRF rejection, and logout. [Latest PHP syntax run](https://github.com/swarajsalve042/online-medical-hospital-management-system/actions/runs/45572861119) · [Latest PHP/MySQL integration run](https://github.com/swarajsalve042/online-medical-hospital-management-system/actions/runs/45572861174). This remains a demo only—never use real patient data or production billing.
+**Verification:** PHP syntax validation and the MySQL-backed HTTP integration workflow pass. CI verifies staff login, protected pages, patient/doctor creation, appointment scheduling, medical-note creation, invoice creation and payment status, report totals, CSRF rejection, and logout. [Latest PHP syntax run](https://github.com/swarajsalve042/online-medical-hospital-management-system/actions/runs/45573712603) · [Latest PHP/MySQL integration run](https://github.com/swarajsalve042/online-medical-hospital-management-system/actions/runs/45573712623). This remains a demo only—never use real patient data or production billing.
 
 ### 8. E-Commerce Web Application
 **Java 17 · Spring Boot · Spring Data JPA · H2 · Maven**
