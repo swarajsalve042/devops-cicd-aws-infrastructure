@@ -1,0 +1,40 @@
+name: Portfolio Applications CI
+on:
+  push:
+    paths:
+      - 'portfolio-applications/**'
+      - '.github/workflows/portfolio-applications.yml'
+  pull_request:
+    paths:
+      - 'portfolio-applications/**'
+      - '.github/workflows/portfolio-applications.yml'
+  workflow_dispatch:
+jobs:
+  expense-tracker:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: portfolio-applications/expense-tracker
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm test
+  java-projects:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [e-commerce, employee-management, student-management]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+          cache-dependency-path: portfolio-applications/${{ matrix.project }}/pom.xml
+      - name: Run Maven tests
+        working-directory: portfolio-applications/${{ matrix.project }}
+        run: mvn --batch-mode --no-transfer-progress test
