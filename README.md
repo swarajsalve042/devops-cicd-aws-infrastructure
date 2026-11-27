@@ -82,7 +82,7 @@ No long-lived AWS access key is stored in the repository.
 The Kind test proves the manifest and application can run on a temporary local Kubernetes cluster; it does not mean an AWS EKS or other production cluster is deployed.
 
 **Verified in CI, but not deployed as persistent production infrastructure:**
-- Jenkinsfile Groovy syntax validation passed; execution on a separately configured Jenkins controller/agent remains unverified.
+- Jenkinsfile Groovy syntax validation passed, and the Jenkinsfile also executed successfully on a temporary Jenkins controller in [ephemeral Jenkins verification](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45956958764). No persistent Jenkins service was provisioned.
 - Terraform formatting, backend-free initialization, and configuration validation passed; no infrastructure provisioning was performed.
 - Ansible playbook syntax validation passed; execution against real remote hosts remains unverified.
 - Kubernetes schema validation passed, and a two-replica application deployment plus Service health check passed on a temporary Kind cluster. No persistent EKS cluster was created.
@@ -132,9 +132,10 @@ An advanced Prometheus and Grafana monitoring lab is maintained in [`observabili
 - [Kubernetes Kind smoke test #2 — successful](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45953027834)
 - [Observability Platform CI #14 — successful](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45953031956)
 - [Amazon ECR image publishing (manual workflow) — successful previous run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45356623225)
+- [Ephemeral Jenkins pipeline execution — successful](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45956958764)
 
 See [the full nine-repository verification audit](docs/PROJECT_VERIFICATION_AUDIT.md). These links document automated checks only; they do not imply production deployment or manual end-user acceptance testing.
 
 ## Run the Jenkins pipeline
 
-The Jenkinsfile includes an agent preflight for Node.js 20+, npm, Docker CLI, and Docker daemon access. Follow the [Jenkins execution runbook](JENKINS_RUNBOOK.md) to configure a real Jenkins Pipeline job and capture live build evidence. GitHub Actions syntax validation is not a live Jenkins execution.
+The Jenkinsfile includes an agent preflight for Node.js 20+, npm, Docker CLI, and Docker daemon access. Follow the [Jenkins execution runbook](JENKINS_RUNBOOK.md) to configure a real Jenkins Pipeline job and capture live build evidence. The ephemeral Jenkins workflow above executes the Jenkinsfile on a temporary Jenkins controller; it does not provision a persistent Jenkins service.
