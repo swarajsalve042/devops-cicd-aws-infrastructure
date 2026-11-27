@@ -1,5 +1,11 @@
 # DevOps CI/CD & AWS Infrastructure
 
+[![nodejs](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/workflows/nodejs.yml/badge.svg)](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/workflows/nodejs.yml)
+[![docker](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/workflows/docker.yml/badge.svg)](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/workflows/docker.yml)
+[![validate infrastructure](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/workflows/validate-infrastructure.yml/badge.svg)](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/workflows/validate-infrastructure.yml)
+[![publish ghcr](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/workflows/publish-ghcr.yml/badge.svg)](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/workflows/publish-ghcr.yml)
+[![kubernetes smoke test](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/workflows/kubernetes-smoke-test.yml/badge.svg)](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/workflows/kubernetes-smoke-test.yml)
+
 A hands-on DevOps project demonstrating a Node.js application, automated testing, Docker containerization, image publishing to Amazon ECR and GitHub Container Registry, and AWS deployment preparation.
 
 ## Recruiter Portfolio
@@ -115,3 +121,15 @@ Terraform, Kubernetes, and Ansible checks should be run only after their tools a
 ## Monitoring & Observability Lab
 
 An advanced Prometheus and Grafana monitoring lab is maintained in [`observability/`](observability/README.md). It includes a Node.js metrics-instrumented service, Prometheus scrape configuration and alert rules, a provisioned Grafana dashboard, Docker Compose orchestration, and a GitHub Actions end-to-end validation workflow. The lab uses no AWS resources and is tested separately from the existing CI/CD application.
+
+
+## Latest automated verification (25 November 2026)
+
+- [Node.js CI — successful GitHub Actions run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45575120968)
+- [Docker build and runtime test — successful GitHub Actions run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45575120938)
+- [Infrastructure configuration validation — successful GitHub Actions run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45575120909)
+- [GHCR image publishing — successful GitHub Actions run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45575121013)
+- [Kubernetes Kind smoke test — successful GitHub Actions run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45363355524)
+- [Amazon ECR image publishing (manual workflow) — successful GitHub Actions run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45356623225)
+
+These links document automated checks only; they do not imply production deployment or manual end-user acceptance testing.
