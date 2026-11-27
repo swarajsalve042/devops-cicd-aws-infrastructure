@@ -10,13 +10,15 @@ This report records automated evidence from the public GitHub repositories. A su
 - Latest CI run: [#17 — successful](https://github.com/swarajsalve042/abode-devops-lifecycle/actions/runs/45950934625)
 - Verified: Node.js tests, Jenkinsfile Groovy parsing, Docker image build, temporary container startup, and `/health` response.
 - SQL Server portfolio workflow #2 passed on 25 November. The CI runs SQL Server scripts against a temporary SQL Server container.
-- Not verified: execution on a separately provisioned Jenkins controller/agent or a production deployment.
+- [Ephemeral Jenkins pipeline execution — successful](https://github.com/swarajsalve042/abode-devops-lifecycle/actions/runs/45956944981).
+- Not verified: a persistent, separately hosted Jenkins service or a production deployment.
 
 ### Jenkins and Docker
 - Latest Node.js/Docker CI run: [#18 — successful](https://github.com/swarajsalve042/devops-lifecycle-jenkins-docker-github/actions/runs/45950939582)
 - Verified: Node.js tests, Docker image build, temporary container startup, and health endpoint.
 - The Jenkinsfile has separate Groovy syntax validation.
-- Not verified: execution on a live Jenkins controller/agent.
+- [Ephemeral Jenkins pipeline execution — successful](https://github.com/swarajsalve042/devops-lifecycle-jenkins-docker-github/actions/runs/45956953216).
+- Not verified: a persistent, separately hosted Jenkins service.
 
 ### AWS CI/CD and Infrastructure
 - Latest Node.js CI: [#98 — successful](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45953031935)
@@ -26,6 +28,7 @@ This report records automated evidence from the public GitHub repositories. A su
 - Latest ephemeral Kind deployment: [#2 — two replicas and Service health check successful](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45953027834)
 - Latest Observability stack end-to-end validation: [#14 — successful](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45953031956)
 - Amazon ECR publishing was previously verified using GitHub OIDC, ECR login, image build, and push: [successful manual run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45356623225).
+- [Ephemeral Jenkins pipeline execution — successful](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45956958764).
 
 ## Other portfolio repositories
 
@@ -44,7 +47,7 @@ The project owner requested a ₹0 deployment-test budget. Therefore:
 - Kubernetes is deployed to a temporary Kind cluster in CI; no persistent EKS cluster is created.
 - ECR push was previously run manually and verified. The workflow remains manual-only to avoid recurring uploads/storage costs.
 - ECS/Fargate production service creation and a public production endpoint remain unverified and are not claimed.
-- Jenkinsfile syntax is checked, but no persistent Jenkins controller/agent is provisioned.
+- Jenkinsfiles are syntax-checked and have each executed successfully on temporary Jenkins controllers in GitHub Actions. No persistent Jenkins controller/agent is provisioned.
 
 ## Completion standard
 
