@@ -81,12 +81,12 @@ No long-lived AWS access key is stored in the repository.
 
 The Kind test proves the manifest and application can run on a temporary local Kubernetes cluster; it does not mean an AWS EKS or other production cluster is deployed.
 
-**Prepared but not yet verified end to end:**
-- Jenkins pipeline execution on a configured Jenkins agent.
-- Terraform validation and any infrastructure provisioning.
-- Ansible syntax and execution against real hosts.
-- Kubernetes manifest validation and deployment to a cluster.
-- ECS/Fargate service launch and public application endpoint.
+**Verified in CI, but not deployed as persistent production infrastructure:**
+- Jenkinsfile Groovy syntax validation passed; execution on a separately configured Jenkins controller/agent remains unverified.
+- Terraform formatting, backend-free initialization, and configuration validation passed; no infrastructure provisioning was performed.
+- Ansible playbook syntax validation passed; execution against real remote hosts remains unverified.
+- Kubernetes schema validation passed, and a two-replica application deployment plus Service health check passed on a temporary Kind cluster. No persistent EKS cluster was created.
+- ECS/Fargate service launch and a public production application endpoint remain unverified.
 
 An ECS cluster and Fargate task definition were created during the learning exercise. ECS service creation was deliberately paused before launch to avoid unexpected AWS charges. The application is not currently confirmed live on ECS.
 
@@ -123,13 +123,14 @@ Terraform, Kubernetes, and Ansible checks should be run only after their tools a
 An advanced Prometheus and Grafana monitoring lab is maintained in [`observability/`](observability/README.md). It includes a Node.js metrics-instrumented service, Prometheus scrape configuration and alert rules, a provisioned Grafana dashboard, Docker Compose orchestration, and a GitHub Actions end-to-end validation workflow. The lab uses no AWS resources and is tested separately from the existing CI/CD application.
 
 
-## Latest automated verification (25 November 2026)
+## Latest automated verification (27 November 2026)
 
-- [Node.js CI — successful GitHub Actions run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45575120968)
-- [Docker build and runtime test — successful GitHub Actions run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45575120938)
-- [Infrastructure configuration validation — successful GitHub Actions run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45575120909)
-- [GHCR image publishing — successful GitHub Actions run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45575121013)
-- [Kubernetes Kind smoke test — successful GitHub Actions run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45363355524)
-- [Amazon ECR image publishing (manual workflow) — successful GitHub Actions run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45356623225)
+- [Node.js CI #98 — successful](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45953031935)
+- [Docker build and runtime test #96 — successful](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45953031975)
+- [Infrastructure validation #7 — Terraform, Ansible, Kubernetes schema and Jenkinsfile syntax all successful](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45953027842)
+- [GHCR image publishing #95 — successful](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45953031930)
+- [Kubernetes Kind smoke test #2 — successful](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45953027834)
+- [Observability Platform CI #14 — successful](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45953031956)
+- [Amazon ECR image publishing (manual workflow) — successful previous run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45356623225)
 
-These links document automated checks only; they do not imply production deployment or manual end-user acceptance testing.
+See [the full nine-repository verification audit](docs/PROJECT_VERIFICATION_AUDIT.md). These links document automated checks only; they do not imply production deployment or manual end-user acceptance testing.
