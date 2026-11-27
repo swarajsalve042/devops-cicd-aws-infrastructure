@@ -134,3 +134,7 @@ An advanced Prometheus and Grafana monitoring lab is maintained in [`observabili
 - [Amazon ECR image publishing (manual workflow) — successful previous run](https://github.com/swarajsalve042/devops-cicd-aws-infrastructure/actions/runs/45356623225)
 
 See [the full nine-repository verification audit](docs/PROJECT_VERIFICATION_AUDIT.md). These links document automated checks only; they do not imply production deployment or manual end-user acceptance testing.
+
+## Run the Jenkins pipeline
+
+The Jenkinsfile includes an agent preflight for Node.js 20+, npm, Docker CLI, and Docker daemon access. Follow the [Jenkins execution runbook](JENKINS_RUNBOOK.md) to configure a real Jenkins Pipeline job and capture live build evidence. GitHub Actions syntax validation is not a live Jenkins execution.
